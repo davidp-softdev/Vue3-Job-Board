@@ -45,7 +45,7 @@ const truncatedDescription = computed(() => {
 
       <div class="flex flex-col lg:flex-row justify-between mb-4">
         <div class="text-orange-700 mb-3">
-          <i class="pi pi-map-marker text-red-600" />
+          <i class="pi pi-map-marker text-xl text-orange-700" />
           {{ job.location }}
         </div>
         <RouterLink
