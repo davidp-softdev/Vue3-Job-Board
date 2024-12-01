@@ -1,4 +1,4 @@
-# Vite-Vue3 Base
+# Job Board made with Vue3, Vite & TailwindCSS
 
 This template should help get you started developing with Vue 3 in Vite.
 
