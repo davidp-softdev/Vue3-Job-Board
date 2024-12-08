@@ -1,4 +1,4 @@
-# Job Board made with Vue3, Vite & TailwindCSS
+# Job Board made with Vue3, Vite & DaisyUI (TailwindCSS)
 
 This template should help get you started developing with Vue 3 in Vite.
 
