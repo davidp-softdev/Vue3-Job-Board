@@ -44,20 +44,31 @@ const handleSubmit = async () => {
       contactPhone: form.company.contactPhone,
     },
   };
+  console.log("UPDATED JOB: ", updatedJob);
 
   try {
-    const response = await axios.put(`/api/jobs/${jobId}`, updatedJob);
+    console.log("AXIOS PUT ", `${import.meta.env.VITE_API_URL}/api/jobs/${jobId}`);
+    const response = await axios.put(
+      `${import.meta.env.VITE_API_URL}/api/jobs/${jobId}`,
+      updatedJob,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
     toast.success("Job Updated Successfully!");
-    router.push(`/job/${response.data.id}`);
+    router.push(`/job/${response.data._id}`);
   } catch (error) {
     toast.error("Error Updating the Job..");
-    console.error("Error updating the job", error);
+    console.error("Error updating the job", error.response ? error.response.data : error);
   }
 };
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`/api/jobs/${jobId}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/jobs/${jobId}`);
     state.job = response.data;
     // Populate Inputs
     form.type = state.job.type;
@@ -80,16 +91,12 @@ onMounted(async () => {
 <template>
   <section class="bg-green-50">
     <div class="container m-auto max-w-2xl py-24">
-      <div
-        class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
-      >
+      <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
         <form @submit.prevent="handleSubmit">
           <h2 class="text-3xl text-center font-semibold mb-6">Edit Job</h2>
 
           <div class="mb-4">
-            <label for="type" class="block text-gray-700 font-bold mb-2"
-              >Job Type</label
-            >
+            <label for="type" class="block text-gray-700 font-bold mb-2">Job Type</label>
             <select
               v-model="form.type"
               id="type"
@@ -105,9 +112,7 @@ onMounted(async () => {
           </div>
 
           <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2"
-              >Job Listing Name</label
-            >
+            <label class="block text-gray-700 font-bold mb-2">Job Listing Name</label>
             <input
               v-model="form.title"
               type="text"
@@ -119,9 +124,7 @@ onMounted(async () => {
             />
           </div>
           <div class="mb-4">
-            <label for="description" class="block text-gray-700 font-bold mb-2"
-              >Description</label
-            >
+            <label for="description" class="block text-gray-700 font-bold mb-2">Description</label>
             <textarea
               v-model="form.description"
               id="description"
@@ -133,9 +136,7 @@ onMounted(async () => {
           </div>
 
           <div class="mb-4">
-            <label for="type" class="block text-gray-700 font-bold mb-2"
-              >Salary</label
-            >
+            <label for="type" class="block text-gray-700 font-bold mb-2">Salary</label>
             <select
               v-model="form.salary"
               id="salary"
@@ -173,9 +174,7 @@ onMounted(async () => {
           <h3 class="text-2xl mb-5">Company Info</h3>
 
           <div class="mb-4">
-            <label for="company" class="block text-gray-700 font-bold mb-2"
-              >Company Name</label
-            >
+            <label for="company" class="block text-gray-700 font-bold mb-2">Company Name</label>
             <input
               v-model="form.company.name"
               type="text"
@@ -187,9 +186,7 @@ onMounted(async () => {
           </div>
 
           <div class="mb-4">
-            <label
-              for="company_description"
-              class="block text-gray-700 font-bold mb-2"
+            <label for="company_description" class="block text-gray-700 font-bold mb-2"
               >Company Description</label
             >
             <textarea
@@ -203,9 +200,7 @@ onMounted(async () => {
           </div>
 
           <div class="mb-4">
-            <label
-              for="contact_email"
-              class="block text-gray-700 font-bold mb-2"
+            <label for="contact_email" class="block text-gray-700 font-bold mb-2"
               >Contact Email</label
             >
             <input
@@ -219,9 +214,7 @@ onMounted(async () => {
             />
           </div>
           <div class="mb-4">
-            <label
-              for="contact_phone"
-              class="block text-gray-700 font-bold mb-2"
+            <label for="contact_phone" class="block text-gray-700 font-bold mb-2"
               >Contact Phone</label
             >
             <input

@@ -24,5 +24,6 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ["vue-toastification"],
+    exclude: ["mongodb"],
   },
 });

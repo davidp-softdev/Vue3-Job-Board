@@ -20,7 +20,7 @@ const deleteJob = async () => {
   try {
     const confirm = window.confirm("Are you sure you want to delete this job?");
     if (confirm) {
-      await axios.delete(`/api/jobs/${jobId}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/jobs/${jobId}`);
       toast.success("Job Deleted Successfully");
       router.push("/jobs");
     }
@@ -32,7 +32,7 @@ const deleteJob = async () => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`/api/jobs/${jobId}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/jobs/${jobId}`);
     state.job = response.data;
   } catch (error) {
     console.error("Error fetching job", error);
@@ -48,23 +48,17 @@ onMounted(async () => {
     <div class="container m-auto py-10 px-6">
       <div class="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
         <main>
-          <div
-            class="bg-white p-6 rounded-lg shadow-md text-center md:text-left"
-          >
+          <div class="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
             <div class="text-gray-500 mb-4">{{ state.job.type }}</div>
             <h1 class="text-3xl font-bold mb-4">{{ state.job.title }}</h1>
-            <div
-              class="text-gray-500 mb-4 flex align-middle justify-center md:justify-start"
-            >
+            <div class="text-gray-500 mb-4 flex align-middle justify-center md:justify-start">
               <i class="pi pi-map-marker text-xl text-orange-700" />
               <p class="text-orange-700">&nbsp;{{ state.job.location }}</p>
             </div>
           </div>
 
           <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-            <h3 class="text-green-800 text-lg font-bold mb-6">
-              Job Description
-            </h3>
+            <h3 class="text-green-800 text-lg font-bold mb-6">Job Description</h3>
 
             <p class="mb-4">
               {{ state.job.description }}
@@ -105,7 +99,7 @@ onMounted(async () => {
           <div class="bg-white p-6 rounded-lg shadow-md mt-6">
             <h3 class="text-xl font-bold mb-6">Manage Job</h3>
             <RouterLink
-              :to="`/jobs/edit/${state.job.id}`"
+              :to="`/jobs/edit/${state.job._id}`"
               class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
               >Edit Job</RouterLink
             >

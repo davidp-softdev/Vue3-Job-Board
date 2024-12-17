@@ -3,7 +3,7 @@ import { reactive, defineProps, onMounted } from "vue";
 import JobListing from "./JobListing.vue";
 import { RouterLink } from "vue-router";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
-import axios from "axios"; // Import Axios for API calls
+import { getData } from "../../server/db"; // Import getData function
 
 // Props
 defineProps({
@@ -20,10 +20,10 @@ const state = reactive({
 // Fetch jobs on component mount
 onMounted(async () => {
   try {
-    const response = await axios.get("http://localhost:5000/api/jobs"); // Use API endpoint
-    state.jobs = response.data;
+    const jobs = await getData(); // Fetch jobs from the database
+    state.jobs = jobs;
   } catch (error) {
-    console.error("Error fetching jobs from API:", error);
+    console.error("Error fetching jobs from database:", error);
   } finally {
     state.isLoading = false;
   }

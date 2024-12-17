@@ -22,6 +22,7 @@ const toast = useToast();
 
 const handleSubmit = async () => {
   const newJob = {
+    id: Date.now().toString(36),
     title: form.title,
     type: form.type,
     location: form.location,
@@ -35,9 +36,9 @@ const handleSubmit = async () => {
     },
   };
   try {
-    const response = await axios.post("/api/jobs", newJob);
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/jobs`, newJob);
     toast.success("Job Created Successfully!");
-    router.push(`/job/${response.data.id}`);
+    router.push(`/job/${response.data._id}`);
   } catch (error) {
     toast.error("Error Creating the Job..");
     console.error("Error fetching job", error);
@@ -48,16 +49,12 @@ const handleSubmit = async () => {
 <template>
   <section class="bg-green-50">
     <div class="container m-auto max-w-2xl py-24">
-      <div
-        class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
-      >
+      <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
         <form @submit.prevent="handleSubmit">
           <h2 class="text-3xl text-center font-semibold mb-6">Add Job</h2>
 
           <div class="mb-4">
-            <label for="type" class="block text-gray-700 font-bold mb-2"
-              >Job Type</label
-            >
+            <label for="type" class="block text-gray-700 font-bold mb-2">Job Type</label>
             <select
               v-model="form.type"
               id="type"
@@ -73,9 +70,7 @@ const handleSubmit = async () => {
           </div>
 
           <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2"
-              >Job Listing Name</label
-            >
+            <label class="block text-gray-700 font-bold mb-2">Job Listing Name</label>
             <input
               v-model="form.title"
               type="text"
@@ -87,9 +82,7 @@ const handleSubmit = async () => {
             />
           </div>
           <div class="mb-4">
-            <label for="description" class="block text-gray-700 font-bold mb-2"
-              >Description</label
-            >
+            <label for="description" class="block text-gray-700 font-bold mb-2">Description</label>
             <textarea
               v-model="form.description"
               id="description"
@@ -101,9 +94,7 @@ const handleSubmit = async () => {
           </div>
 
           <div class="mb-4">
-            <label for="type" class="block text-gray-700 font-bold mb-2"
-              >Salary</label
-            >
+            <label for="type" class="block text-gray-700 font-bold mb-2">Salary</label>
             <select
               v-model="form.salary"
               id="salary"
@@ -141,9 +132,7 @@ const handleSubmit = async () => {
           <h3 class="text-2xl mb-5">Company Info</h3>
 
           <div class="mb-4">
-            <label for="company" class="block text-gray-700 font-bold mb-2"
-              >Company Name</label
-            >
+            <label for="company" class="block text-gray-700 font-bold mb-2">Company Name</label>
             <input
               v-model="form.company.name"
               type="text"
@@ -155,9 +144,7 @@ const handleSubmit = async () => {
           </div>
 
           <div class="mb-4">
-            <label
-              for="company_description"
-              class="block text-gray-700 font-bold mb-2"
+            <label for="company_description" class="block text-gray-700 font-bold mb-2"
               >Company Description</label
             >
             <textarea
@@ -171,9 +158,7 @@ const handleSubmit = async () => {
           </div>
 
           <div class="mb-4">
-            <label
-              for="contact_email"
-              class="block text-gray-700 font-bold mb-2"
+            <label for="contact_email" class="block text-gray-700 font-bold mb-2"
               >Contact Email</label
             >
             <input
@@ -187,9 +172,7 @@ const handleSubmit = async () => {
             />
           </div>
           <div class="mb-4">
-            <label
-              for="contact_phone"
-              class="block text-gray-700 font-bold mb-2"
+            <label for="contact_phone" class="block text-gray-700 font-bold mb-2"
               >Contact Phone</label
             >
             <input
