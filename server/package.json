@@ -1,0 +1,17 @@
+{
+  "name": "vue-job-board-server",
+  "version": "1.0.0",
+  "description": "Server for the Vue Jobs Board",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.12.0"
+  }
+}

@@ -4,7 +4,7 @@ import cors from "cors";
 import jobRoutes from "./routes/jobRoutes.js"; // Import the job routes
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000; // Use environment-provided port or default to 5000
 
 // Enable CORS for all origins
 app.use(cors());
