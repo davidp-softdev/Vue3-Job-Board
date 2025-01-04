@@ -2,8 +2,9 @@ import { MongoClient } from "mongodb";
 // CommonJS: Default syntax if no "type": "module"
 // const { MongoClient } = require("mongodb");
 
-const db_password = "2NO0atXKaMIGu9x5";
-const uri = `mongodb+srv://davidmalefoy:${db_password}@sandboxcluster.0u4mx.mongodb.net/?retryWrites=true&w=majority&appName=SandboxCluster`;
+const db_user = "";
+const db_password = "";
+const uri = `mongodb+srv://dbuser:${db_password}@sandboxcluster.0u4mx.mongodb.net/?retryWrites=true&w=majority&appName=SandboxCluster`;
 
 // import { promisify } from "util";
 // console.log(typeof promisify); // Should print 'function'
