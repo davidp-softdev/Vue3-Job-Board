@@ -1,6 +1,11 @@
-// routes/jobRoutes.js
 import express from "express";
-import { getJobs, addJob, getJobById, updateJobById, deleteJobById } from "../db.js";
+import {
+  getJobs,
+  addJob,
+  getJobById,
+  updateJobById,
+  deleteJobById,
+} from "../db.js";
 
 const router = express.Router();
 
