@@ -7,6 +7,9 @@ import axios from "axios";
 
 const route = useRoute();
 
+const VITE_API_URL =
+  import.meta.env.VITE_API_URL || "https://vue-job-board-server.onrender.com";
+
 const jobId = route.params.id;
 
 const form = reactive({
@@ -49,7 +52,7 @@ const handleSubmit = async () => {
   try {
     // console.log("AXIOS PUT ", `${import.meta.env.VITE_API_URL}/api/jobs/${jobId}`);
     const response = await axios.put(
-      `${import.meta.env.VITE_API_URL}/api/jobs/${jobId}`,
+      `${VITE_API_URL}/api/jobs/${jobId}`,
       updatedJob,
       {
         headers: {

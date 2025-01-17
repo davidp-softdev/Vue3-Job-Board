@@ -5,7 +5,8 @@ import { RouterLink } from "vue-router";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import axios from "axios"; // Import Axios for API calls
 
-const VITE_API_URL = import.meta.env.VITE_API_URL;
+const VITE_API_URL =
+  import.meta.env.VITE_API_URL || "https://vue-job-board-server.onrender.com";
 
 // Props
 defineProps({
