@@ -18,15 +18,28 @@ const state = reactive({
 
 const VITE_API_URL =
   import.meta.env.VITE_API_URL || "https://vue-job-board-server.onrender.com";
-console.log("API URL:", VITE_API_URL);
+
+if (import.meta.env.MODE === "production") {
+  console.log("Running in production mode");
+  const PROD_MODE = true;
+} else {
+  console.log("Running in development mode");
+  const PROD_MODE = false;
+}
 
 const deleteJob = async () => {
   try {
     const confirm = window.confirm("Are you sure you want to delete this job?");
-    if (confirm) {
-      await axios.delete(`${VITE_API_URL}/api/jobs/${jobId}`);
-      toast.success("Job Deleted Successfully");
-      router.push("/jobs");
+
+    if (!PROD_MODE) {
+      if (confirm) {
+        await axios.delete(`${VITE_API_URL}/api/jobs/${jobId}`);
+        toast.success("Job Deleted Successfully");
+        router.push("/jobs");
+      }
+    } else {
+      // Disabled in production
+      toast.error("Feature disabled in Production mode. Sorry! :)");
     }
   } catch (error) {
     console.error("Error deleting Job", error);
