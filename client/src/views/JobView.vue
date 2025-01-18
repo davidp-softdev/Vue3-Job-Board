@@ -28,6 +28,10 @@ if (import.meta.env.MODE === "production") {
 }
 
 const deleteJob = async () => {
+  // Disabled in production
+  toast.error("Feature disabled in Production mode. Sorry! :)");
+  return;
+
   try {
     const confirm = window.confirm("Are you sure you want to delete this job?");
 
